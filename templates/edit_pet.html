@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Edit Pet{% endblock %}
+
+
+{% block content %}
+
+
+<h1>{{ pet.name }}</h1>
+
+{% if pet.photo_url %}
+<img src="{{ pet.photo_url }}" alt="">
+{% endif %}
+
+<p><b>Age:</b>{{ pet.age }}</p>
+<p><b>Species:</b>{{ pet.species }}</p>
+
+
+<h2>Edit information below:</h2>
+
+{% for msg in get_flashed_messages() %}
+<p>{{ msg }}</p>
+{% endfor %}
+
+<form id="pet-edit-form" method="POST">
+  {{ form.hidden_tag() }}
+
+  {% for field in form
+  if field.widget.input_type != 'hidden' %}
+
+  <p>
+    {{ field.label }}
+    {{ field }}
+
+    {% for error in field.errors %}
+    {{ error }}
+    {% endfor %}
+  </p>
+
+  {% endfor %}
+
+  <button type="submit">Submit</button>
+</form>
+
+{% endblock %}
