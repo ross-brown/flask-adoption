@@ -1,21 +1,27 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SelectField, BooleanField
-from wtforms.validators import AnyOf, URL, Optional
+from wtforms import StringField, SelectField, BooleanField
+from wtforms.validators import AnyOf, URL, Optional, InputRequired
 
 
 class AddPetForm(FlaskForm):
     """Form for adding pet"""
 
-    name = StringField("Pet Name")
+    name = StringField("Pet Name",
+                       validators=[InputRequired()])
+
     species = StringField("Pet Species",
-                          validators=[AnyOf(['cat', 'dog', 'porcupine'])])
+                          validators=[AnyOf(['cat', 'dog', 'porcupine']),
+                                      InputRequired()])
     photo_url = StringField("Photo URL",
                             validators=[URL(), Optional()])
     age = SelectField("Pet Age",
                       choices=[('baby', 'Baby'), ('young', 'Young'),
                                ('adult', 'Adult'), ('senior', 'Senior')],
-                      validators=[AnyOf(['baby', 'young', 'adult', 'senior'])])
-    notes = StringField("Notes")
+                      validators=[AnyOf(['baby', 'young', 'adult', 'senior']),
+                                  InputRequired()])
+    notes = StringField("Notes",
+                            validators=[Optional()])
+    # instead of stringfield use textareafield, displays more space in the input form ^
 
 
 class EditPetForm(FlaskForm):

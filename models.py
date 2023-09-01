@@ -36,6 +36,7 @@ class Pet(db.Model):
     age = db.Column(
         db.String(6),
         # db.CheckConstraint('age in ("baby", "young", "adult", "senior")'),
+        # needs to be verbatim? ^ possibly sql
         nullable=False
     )
 

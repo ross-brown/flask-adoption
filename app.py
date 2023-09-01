@@ -11,6 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = "secret"
+debug = DebugToolbarExtension(app)
 
 connect_db(app)
 
@@ -51,6 +52,7 @@ def add_pet():
 
 @app.route("/<int:pet_id>", methods=["GET", "POST"])
 def edit_pet(pet_id):
+    """Displays Pet Details / edit form; handles editing pet"""
 
     pet = Pet.query.get_or_404(pet_id)
     form = EditPetForm(obj=pet)
