@@ -6,6 +6,8 @@
 
 {% block content %}
 
+<h1>Our Pets</h1>
+
 {% for msg in get_flashed_messages() %}
 <p>{{ msg }}</p>
 {% endfor %}
@@ -32,6 +34,11 @@
   <button>Add Pet</button>
 </form>
 
+<h2>Random Petfinder Pet</h2>
 
+<img src="{{ random_pet['photo_url'] }}" alt="random pet image">
+<div>
+<b>{{ random_pet['name']}}</b> Age: {{ random_pet['age'] }}
+</div>
 
 {% endblock %}
